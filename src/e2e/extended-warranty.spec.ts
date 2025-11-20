@@ -1,5 +1,6 @@
 // tests/extended-warranty.spec.ts
 import { test, expect } from '@playwright/test';
+import { mockWarranties } from '../mocks/mockApi';
 
 test.describe('Extended Warranty Dashboard', () => {
   test('navigation works', async ({ page }) => {
@@ -8,21 +9,50 @@ test.describe('Extended Warranty Dashboard', () => {
     await expect(page).toHaveURL('/warranty');
   });
 
-  test('displays warranty cards with correct status and badges', async ({ page }) => {
+  test('displays all warranty cards with correct data from mockApi', async ({ page }) => {
     await page.goto('/warranty');
 
-    const macbookCard = page.getByRole('heading', { name: 'MacBook Pro 16″ M2 Max' }).locator('..').locator('..');
-    await expect(macbookCard.getByText('Active', { exact: true })).toBeVisible();
-    await expect(macbookCard.getByText('Extended Until')).toBeVisible();
+    for (const warranty of mockWarranties) {
+      const card = page.getByRole('heading', { name: warranty.product }).locator('..').locator('..');
 
-    const iphoneCard = page.getByRole('heading', { name: 'iPhone 15 Pro' }).locator('..').locator('..');
-    await expect(iphoneCard.getByText('Expired', { exact: true })).toBeVisible();
-    await expect(iphoneCard.getByText('This device is no longer under warranty')).toBeVisible();
+      await expect(card).toBeVisible();
+      await expect(card.getByText(warranty.product)).toBeVisible();
+
+      // Status badge — uses capitalized version from your getStatusBadge()
+      const statusDisplay = warranty.status
+        .replace('_', ' ')
+        .replace(/\b\w/g, l => l.toUpperCase()); // "active" → "Active"
+      await expect(card.getByText(statusDisplay, { exact: true })).toBeVisible();
+      
+      // Extended warranty text
+      if (warranty.extended && warranty.extendedUntil) {
+        await expect(card.getByText('Extended Until')).toBeVisible();
+      }
+
+      // Warning banner for expired
+      if (warranty.status === 'expired') {
+        await expect(card.getByText('This device is no longer under warranty')).toBeVisible();
+      }
+    }
   });
 
-  test('shows properly formatted dates', async ({ page }) => {
+  test('shows properly formatted dates from mock data', async ({ page }) => {
     await page.goto('/warranty');
-    await expect(page.getByText(/Jan \d{1,2}, 202\d/)).toHaveCount(5);
+
+    const allDates = mockWarranties.flatMap(w => [
+      w.purchaseDate,
+      w.warrantyEndDate,
+      w.extendedUntil,
+    ].filter(Boolean));
+
+    for (const isoDate of allDates) {
+      const formatted = new Date(isoDate!).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+      await expect(page.getByText(formatted)).toBeVisible();
+    }
   });
 
   test('mobile navigation works', async ({ page }) => {

@@ -61,7 +61,10 @@ export default function SiteHealthPage() {
           >
             <div className="flex items-start justify-between mb-4">
               {getStatusIcon(metric.status)}
-              <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <span 
+                role="status"
+                className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+              >
                 {metric.status}
               </span>
             </div>

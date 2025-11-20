@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
 }
 
-/* Optional: improve focus styles globally */
+/* improve focus styles globally */
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
