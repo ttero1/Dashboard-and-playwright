@@ -27,5 +27,5 @@ The dashboard will be available at `http://localhost:5173`
 ### Running Tests
 
 ```bash
-docker compose run e2e
+docker compose run --rm e2e
 ```
