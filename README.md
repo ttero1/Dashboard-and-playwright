@@ -1,7 +1,7 @@
 
 ## Overview
 
-This repository contains a modern web-dashboard built with React, TypeScript and Vite. It uses a mock api to display Warranty status and Site Health monitoring features, and has automated end-to-end tests using Playwright. 
+This repository contains a modern web-dashboard built with React, TypeScript and Vite. It displays Warranty status and Site Health information gotten from a mock api, and has automated end-to-end tests using Playwright. 
 
 ## Tech Stack
 
