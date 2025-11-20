@@ -9,7 +9,7 @@ test.describe('Extended Warranty Dashboard', () => {
     await expect(page).toHaveURL('/warranty');
   });
 
-  test('displays all warranty cards with correct data from mockApi', async ({ page }) => {
+  test('displays warranty cards with correct data from mockApi', async ({ page }) => {
     await page.goto('/warranty');
 
     for (const warranty of mockWarranties) {
@@ -18,7 +18,7 @@ test.describe('Extended Warranty Dashboard', () => {
       await expect(card).toBeVisible();
       await expect(card.getByText(warranty.product)).toBeVisible();
 
-      // Status badge — 
+      // Status badge 
       const statusDisplay = warranty.status
         .replace('_', ' ')
         .replace(/\b\w/g, l => l.toUpperCase()); 

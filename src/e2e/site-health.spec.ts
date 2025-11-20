@@ -11,10 +11,9 @@ test.describe('Site Health Monitoring Page', () => {
     await expect(page.getByRole('heading', { name: 'Site Health Monitoring' })).toBeVisible();
   });
 
-  test('displays all health metrics exactly as in mockApi', async ({ page }) => {
+  test('displays all health metrics as in mockApi', async ({ page }) => {
     for (const metric of mockHealth) {
-      // Find the specific card by locating the heading first, then getting its closest card ancestor
-      // Look for the rounded card container that has the specific class pattern
+      // Find the specific card 
       const card = page
         .locator('div.rounded-2xl.border')
         .filter({ has: page.getByRole('heading', { name: metric.name, exact: true }) })
@@ -32,7 +31,7 @@ test.describe('Site Health Monitoring Page', () => {
       const status = card.locator('span[role="status"]');
       await expect(status).toHaveText(metric.status);
       
-      // Timestamp — just verify it exists (format is dynamic)
+      // Timestamp 
       await expect(card.getByText(/Last check:/)).toBeVisible();
     }
   });
