@@ -19,7 +19,7 @@ This repository contains a modern web-dashboard built with React, TypeScript and
 Start the dashboard application:
 
 ```bash
-docker compose build up
+docker compose up --build  
 ```
 
 The dashboard will be available at `http://localhost:5173`
