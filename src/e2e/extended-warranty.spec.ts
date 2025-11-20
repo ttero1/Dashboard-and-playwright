@@ -18,10 +18,10 @@ test.describe('Extended Warranty Dashboard', () => {
       await expect(card).toBeVisible();
       await expect(card.getByText(warranty.product)).toBeVisible();
 
-      // Status badge — uses capitalized version from your getStatusBadge()
+      // Status badge — 
       const statusDisplay = warranty.status
         .replace('_', ' ')
-        .replace(/\b\w/g, l => l.toUpperCase()); // "active" → "Active"
+        .replace(/\b\w/g, l => l.toUpperCase()); 
       await expect(card.getByText(statusDisplay, { exact: true })).toBeVisible();
       
       // Extended warranty text

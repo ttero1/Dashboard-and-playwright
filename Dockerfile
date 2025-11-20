@@ -25,19 +25,19 @@ FROM mcr.microsoft.com/playwright:v1.56.1-noble AS e2e
 
 WORKDIR /app
 
-# Copy only package files first
+# Copy package files 
 COPY package*.json ./
 
-# Install dependencies again because the base OS is different (not Alpine)
+
 RUN npm ci
 
-# Install Playwright browsers (required!)
+# Install Playwright browsers
 RUN npx playwright install --with-deps
 
-# Now copy the source code
+#opy the source code
 COPY . .
 
-# Make playwright available globally (fixes PATH issues)
+# Make playwright available globally 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 CMD ["npm", "run", "test:e2e"]

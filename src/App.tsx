@@ -86,7 +86,7 @@ export default function Layout() {
                 </NavLink>
               ))}
 
-              {/* Dark Mode Toggle - Accessible */}
+              {/* Dark Mode Toggle */}
               <button
                 onClick={() => setIsDark(!isDark)}
                 aria-label="Toggle dark mode"
@@ -116,7 +116,7 @@ export default function Layout() {
                 {isDark ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
               </button>
 
-              {/* Mobile Menu Button - Accessible */}
+              {/* Mobile Menu Button  */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle navigation menu"

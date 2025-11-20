@@ -6,7 +6,7 @@ import Layout from './App';
 import HomePage from './pages/HomePage';
 import ExtendedWarrantyPage from './pages/ExtendedWarranty';
 import SiteHealthPage from './pages/SiteHealth';
-import './index.css'; // or App.css
+import './index.css'; 
 
 const router = createBrowserRouter([
   {

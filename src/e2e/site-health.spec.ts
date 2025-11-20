@@ -13,19 +13,27 @@ test.describe('Site Health Monitoring Page', () => {
 
   test('displays all health metrics exactly as in mockApi', async ({ page }) => {
     for (const metric of mockHealth) {
-      const card = page.getByRole('heading', { name: metric.name }).locator('..').locator('..');
-
+      // Find the specific card by locating the heading first, then getting its closest card ancestor
+      // Look for the rounded card container that has the specific class pattern
+      const card = page
+        .locator('div.rounded-2xl.border')
+        .filter({ has: page.getByRole('heading', { name: metric.name, exact: true }) })
+        .first();
+      
       await expect(card).toBeVisible();
-      await expect(card.getByText(metric.name)).toBeVisible();
-      await expect(card.getByText(metric.value)).toBeVisible();
-
-      // Status badge — your UI shows uppercase
-      //const statusDisplay = metric.status.charAt(0).toUpperCase() + metric.status.slice(1);
-      const status = card.locator('[role="status"]');
+      
+      // Verify the metric name
+      await expect(card.getByRole('heading', { name: metric.name, exact: true })).toBeVisible();
+      
+      // Verify the metric value
+      await expect(card.getByText(metric.value, { exact: true })).toBeVisible();
+      
+      // Status badge 
+      const status = card.locator('span[role="status"]');
       await expect(status).toHaveText(metric.status);
-
+      
       // Timestamp — just verify it exists (format is dynamic)
-      await expect(card.getByText(/Last check:/).first()).toBeVisible();
+      await expect(card.getByText(/Last check:/)).toBeVisible();
     }
   });
 

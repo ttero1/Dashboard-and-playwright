@@ -1,4 +1,4 @@
-// vite.config.ts – Vite 7 compatible, fixes HMR for host + Docker
+// vite.config.ts – 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -15,7 +15,6 @@ export default defineConfig({
 
     hmr: {
       protocol: 'ws',         // Force plain WebSocket (no wss)
-      // No host: let Vite infer from request origin (localhost from host, app from container)
     },
 
     watch: {
@@ -23,7 +22,6 @@ export default defineConfig({
       interval: 1000,
     },
 
-    // Allow flexible origins (host browser + container access)
     origin: undefined,        // Or explicitly: 'http://localhost:5173' if you want stricter host-only
   },
 

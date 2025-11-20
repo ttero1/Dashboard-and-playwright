@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Calendar, Shield, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { mockWarranties } from '../mocks/mockApi';
 
-// Fixed function — was missing arrow and proper syntax
 const formatDate = (dateStr: string): string => {
   return new Date(dateStr).toLocaleDateString('en-US', {
     year: 'numeric',

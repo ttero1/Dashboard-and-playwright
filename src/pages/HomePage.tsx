@@ -21,7 +21,7 @@ export default function HomePage() {
         className="text-center"
       >
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-          Welcome to Your Dashboard
+          Welcome to My Dashboard
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
           Monitor warranties, site performance, and system health — all with a modern, delightful experience.
@@ -46,9 +46,7 @@ export default function HomePage() {
           </motion.div>
         ))}
       </div>
-        <div className="bg-white dark:bg-black p-4">
-       <p className="text-black dark:text-white">Test dark mode</p>
-     </div>
+
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {/* Warranty Card */}
@@ -107,7 +105,7 @@ export default function HomePage() {
         transition={{ delay: 0.8 }}
         className="text-center text-gray-500 dark:text-gray-400"
       >
-        <p>Built with React 18, React Router v6 Data APIs, Tailwind CSS, Framer Motion</p>
+        <p>Built with React 19, React Router v6 Data APIs, Tailwind CSS, Framer Motion</p>
       </motion.div>
     </div>
   );
